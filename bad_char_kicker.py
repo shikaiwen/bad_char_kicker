@@ -2,7 +2,7 @@ import sublime
 import sublime_plugin
 
 
-class KPluginCommand(sublime_plugin.TextCommand):
+class BadCharKickerCommand(sublime_plugin.TextCommand):
 	def run(self, edit):
 		# self.view.insert(edit, 0, "Hello, World!")
 		allcontent = sublime.Region(0,self.view.size())
