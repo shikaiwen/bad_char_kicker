@@ -1,7 +1,7 @@
 import sublime
 import sublime_plugin
 
-
+# https://www.python.org/dev/peps/pep-0293/
 class BadCharKickerCommand(sublime_plugin.TextCommand):
 	def run(self, edit):
 		# self.view.insert(edit, 0, "Hello, World!")
