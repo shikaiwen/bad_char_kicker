@@ -1,5 +1,6 @@
 import sublime
 import sublime_plugin
+import re
 
 # https://www.python.org/dev/peps/pep-0293/
 class BadCharKickerCommand(sublime_plugin.TextCommand):
@@ -11,17 +12,27 @@ class BadCharKickerCommand(sublime_plugin.TextCommand):
 		# view = self.window.active_view()
 		view = sublime.active_window().active_view()
 		# word = view.word(view.sel()[0])
+		# get selected region
 		region = view.sel()[0]
 		selectedStr = view.substr(view.sel()[0])
 		if len(selectedStr)==0 :
 			return
 
+		return;
+
+		usuallChar = {"？":"?","：":":","（":"(","）":")"}
 		v = []
 		for c in selectedStr:
 			try:
 				v.append(c.encode("ascii"))
 			except UnicodeError:
-				v.append(" ");
+				# if it's a invisiable char then replace with space
+				if(re.match("\s",c)):
+					v.append(" ");
+				elif c in usuallChar:
+					v.append(usuallChar[c]);
+				
+
 				# print("error")
 		b = bytearray()
 		b.extend(map(ord,v))
